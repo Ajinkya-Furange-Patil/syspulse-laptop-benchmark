@@ -94,6 +94,16 @@ if not exist "bin" mkdir bin
 if not exist "build" mkdir build
 if not exist "results" mkdir results
 
+:: Compile Windows Version Resource (Embeds 'Ajinkya Furange' metadata)
+where rc.exe >nul 2>&1
+if %errorlevel% equ 0 (
+    rc /nologo /fo build\version.res src\version.rc
+) else if exist "C:\Program Files (x86)\Windows Kits\10\bin\10.0.26100.0\x64\rc.exe" (
+    "C:\Program Files (x86)\Windows Kits\10\bin\10.0.26100.0\x64\rc.exe" /nologo /fo build\version.res src\version.rc
+)
+set "RES_OBJ="
+if exist "build\version.res" set "RES_OBJ=build\version.res"
+
 if "%HAS_CUDA%"=="1" goto BUILD_CUDA
 goto BUILD_CPU_FALLBACK
 
@@ -108,13 +118,13 @@ if %errorlevel% neq 0 (
 
 echo.
 echo [2/2] Compiling Master Benchmark Executable with CUDA Support...
-cl /nologo /O2 /std:c++20 /openmp /EHsc /W3 /D_CRT_SECURE_NO_WARNINGS /Iinclude /I"%CUDA_PATH%\include" src\main.cpp build\cuda_kernels.obj /Fe:bin\laptop_benchmark.exe /Fo:build\ /link /LIBPATH:"%CUDA_PATH%\lib\x64" cudart.lib Powrprof.lib wbemuuid.lib ole32.lib oleaut32.lib Advapi32.lib
+cl /nologo /O2 /std:c++20 /openmp /EHsc /W3 /D_CRT_SECURE_NO_WARNINGS /Iinclude /I"%CUDA_PATH%\include" src\main.cpp build\cuda_kernels.obj %RES_OBJ% /Fe:bin\laptop_benchmark.exe /Fo:build\ /link /LIBPATH:"%CUDA_PATH%\lib\x64" cudart.lib Powrprof.lib wbemuuid.lib ole32.lib oleaut32.lib Advapi32.lib Shell32.lib
 if %errorlevel% neq 0 (
     echo [ERROR] Linking failed!
     pause
     exit /b %errorlevel%
 )
-goto BUILD_SUCCESS
+goto SIGN_BINARY
 
 :BUILD_CPU_FALLBACK
 echo.
@@ -128,16 +138,23 @@ if %errorlevel% neq 0 (
 
 echo.
 echo [2/2] Compiling Master Benchmark Executable (Universal CPU Mode)...
-cl /nologo /O2 /std:c++20 /openmp /EHsc /W3 /D_CRT_SECURE_NO_WARNINGS /Iinclude src\main.cpp build\cuda_stub.obj /Fe:bin\laptop_benchmark.exe /Fo:build\ Powrprof.lib wbemuuid.lib ole32.lib oleaut32.lib Advapi32.lib
+cl /nologo /O2 /std:c++20 /openmp /EHsc /W3 /D_CRT_SECURE_NO_WARNINGS /Iinclude src\main.cpp build\cuda_stub.obj %RES_OBJ% /Fe:bin\laptop_benchmark.exe /Fo:build\ Powrprof.lib wbemuuid.lib ole32.lib oleaut32.lib Advapi32.lib Shell32.lib
 if %errorlevel% neq 0 (
     echo [ERROR] Linking failed!
     pause
     exit /b %errorlevel%
 )
 
+:SIGN_BINARY
+if exist "scripts\sign_binary.ps1" (
+    echo.
+    powershell -NoProfile -ExecutionPolicy Bypass -File "scripts\sign_binary.ps1" "bin\laptop_benchmark.exe"
+)
+
 :BUILD_SUCCESS
 echo.
 echo =======================================================================
+
 echo   BUILD COMPLETED SUCCESSFULLY!
 echo   Executable generated: bin\laptop_benchmark.exe
 echo =======================================================================

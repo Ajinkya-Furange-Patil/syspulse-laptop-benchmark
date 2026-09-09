@@ -25,7 +25,9 @@
 #endif
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#include <shellapi.h>
 #include <omp.h>
+
 
 #include "sys_detect.hpp"
 #include "ram_bench.hpp"
@@ -260,5 +262,9 @@ int main(int argc, char* argv[]) {
         std::cout << "[INFO] Buyer Audit Data exported to: results/laptop_buyer_audit.json\n";
     }
 
+    // Automatically launch interactive HTML inspection report in default browser
+    ShellExecuteA(NULL, "open", "results\\laptop_buyer_inspection.html", NULL, NULL, SW_SHOWNORMAL);
+
     return 0;
 }
+
