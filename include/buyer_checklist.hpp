@@ -435,12 +435,14 @@ inline void GenerateBuyerHtmlReport(const std::string& filepath,
   <div class="top-banner">
     <div class="title-area">
       <h1>💻 Laptop Technical Buyer's Inspection & Audit</h1>
+      <div style="color: var(--accent); font-size: 13px; font-weight: 600; margin-top: 2px;">Lead Architect & Developer: Ajinkya Furange | SysPulse v1.0.0</div>
       <div style="color: var(--muted); font-size: 14px; margin-top: 4px;">Evaluated System: <strong>)HTML"
       << sys.cpu.modelName << " | " << sys.gpu.name << R"HTML(</strong></div>
       <div style="margin-top: 10px; font-size: 15px; font-weight: 700; color: )HTML" 
       << (sc.totalScore >= 75 ? "#3fb950" : (sc.totalScore >= 55 ? "#d29922" : "#f85149")) << R"HTML(;">OVERALL VERDICT: )HTML"
       << sc.overallVerdict << R"HTML(</div>
     </div>
+
     <div class="score-badge">
       <div style="font-size: 11px; color: var(--muted); text-transform: uppercase; font-weight: 700;">Hardware Score</div>
       <div class="score-num">)HTML" << sc.totalScore << R"HTML(<span style="font-size:18px; color:var(--muted)">/100</span></div>

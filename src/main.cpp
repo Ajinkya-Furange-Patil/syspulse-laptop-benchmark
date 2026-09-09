@@ -98,11 +98,13 @@ int main(int argc, char* argv[]) {
     }
 
     std::cout << "\n========================================================================================\n";
-    std::cout << "          COMPREHENSIVE PC & LAPTOP HARDWARE EVALUATION SUITE                           \n";
+    std::cout << "          SYSPULSE: PC BENCHMARK & 34-POINT LAPTOP BUYER INSPECTION SUITE              \n";
     std::cout << "========================================================================================\n";
+    std::cout << " Lead Developer & Architect: Ajinkya Furange\n";
     std::cout << " Purpose: Complete pre-purchase & performance validation across CPU, RAM, GPU, & AI.\n";
     std::cout << " Mode:    Zero-Hardcoding Dynamic Hardware Probing\n";
     std::cout << "----------------------------------------------------------------------------------------\n";
+
 
     // 1. PROBE HARDWARE
     std::cout << "[STEP 1/6] Probing System Hardware Topology..." << std::endl;
