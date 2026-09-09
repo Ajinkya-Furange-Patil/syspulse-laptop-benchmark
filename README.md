@@ -10,7 +10,10 @@
 
 **A single zero-dependency tool to audit, benchmark, and stress-test your PC hardware before buying or tuning.**
 
-[Quick Start](#-quick-start-60-seconds) • [What It Audits](#-what-it-audits-the-34-point-checklist) • [Reports](#-interactive-html-reports) • [Architecture](#-architecture--how-it-works) • [Roadmap & Suggestions](#-roadmap--suggestions-for-students) • [Contributing](#-contributing)
+### 📥 [Click Here to Download Standalone Executable (SysPulse_Portable.zip)](https://github.com/Ajinkya-Furange-Patil/syspulse-laptop-benchmark/releases/latest/download/SysPulse_Portable.zip)
+*⚡ Zero Setup • No Visual Studio • No Python • No CUDA SDK • No Admin Rights • Runs Completely Offline on Any Laptop!*
+
+[Direct Download](#-download-and-test-in-retail-shops-zero-setup) • [Quick Start](#-quick-start) • [What It Audits](#-what-it-audits-the-34-point-checklist) • [Reports](#-interactive-html-reports) • [Roadmap](#-roadmap--suggestions-for-students)
 
 </div>
 
@@ -29,64 +32,59 @@ When students and developers buy a laptop or evaluate their PC, **OEM specificat
 
 ---
 
-## ✨ Key Features & Capabilities
+## 🎒 Download and Test in Retail Shops (Zero Setup)
 
-```
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│                                 SYSPULSE BENCHMARK ENGINE                              │
-├───────────────────┬───────────────────┬───────────────────┬────────────────────────────┤
-│  ⚡ CPU & SIMD    │  🧠 MEMORY SYSTEM │  🚀 GPU & AI      │  🔥 THERMAL & POWER        │
-│  • Core Topology  │  • Dual-Channel   │  • SGEMM TFLOPs   │  • Sustained Drop %        │
-│  • AVX2 & AVX-512 │  • Bandwidth GB/s │  • GELU & VRAM BW │  • CPU+GPU Cross-Throttle  │
-│  • Multi-Scaling  │  • DRAM Latency   │  • LLM Ceiling    │  • TjMax Safety Headroom   │
-└───────────────────┴───────────────────┴───────────────────┴────────────────────────────┘
-```
+If you are visiting a laptop showroom (e.g. Croma, Reliance Digital, Best Buy, or checking a refurbished laptop from OLX), **you do not have time to install Visual Studio, C++ compilers, or Python**. 
 
-- 🔬 **Zero-Hardcoding Dynamic Hardware Probing**: Reads CPU topology, physical vs logical cores, cache, PCIe generation, and RAM bus channels directly via Win32 WMI and CPUID register flags.
-- ⚡ **AVX2 & AVX-512 Vector Engine**: Measures raw FP32/FP64 mathematical throughput and detects microarchitectural SIMD acceleration.
-- 🧠 **RAM Dual-Channel Verification**: Stream tests memory bandwidth (GB/s) and flags single-channel bandwidth bottlenecks.
-- 🤖 **Native CUDA AI & Gaming Workloads**: Runs 2D shared-memory tiled SGEMM matrix multiplication and activation kernels to calculate real TFLOPs, VRAM bandwidth, and local LLM parameter ceilings.
-- 🔌 **Universal CPU Fallback**: Automatically compiles and executes on **any Windows PC** (including Intel Iris Xe and AMD Radeon systems) even if CUDA is not installed.
-- ⚖️ **Simultaneous Cross-Throttling Stress**: Runs CPU OpenMP workers alongside GPU compute kernels simultaneously to reveal shared thermal and VRM power-starvation limits.
-- 📋 **34-Point Buyer Inspection**: Translates technical measurements into a plain-English scorecard with **Strengths (Pros)**, **Cautions**, and **Red Flag Dealbreakers**.
-- 📊 **Zero-Dependency Interactive HTML Reports**: Generates self-contained dashboards with dark mode aesthetics and instant status filters for offline viewing and sharing.
+**You can run SysPulse directly from a USB flash drive with ZERO external setup!**
+
+### 📦 3-Step Testing Walkthrough:
+1. **Download the Portable Bundle**:
+   - Download **[SysPulse_Portable.zip](https://github.com/Ajinkya-Furange-Patil/syspulse-laptop-benchmark/releases/latest/download/SysPulse_Portable.zip)** (only ~360 KB!).
+2. **Copy to Any USB Drive**:
+   - Extract the `.zip` archive and copy the folder onto your USB pendrive.
+3. **Plug & Run on the Demo / New Laptop**:
+   - Plug your USB drive into the laptop in the store.
+   - Double-click **`run_portable.bat`** (or `laptop_benchmark.exe`).
+   - Wait **30 to 60 seconds** as it stress-tests CPU, RAM, GPU, thermals, and storage.
+   - The interactive **34-point Laptop Buyer Inspection Report** will automatically pop up in Microsoft Edge / Chrome!
+
+### 🛡️ Why It Runs 100% Independently:
+- **No External Runtimes Needed**: Relies strictly on native Windows OS libraries (`kernel32.dll`, `user32.dll`, `ole32.dll`, `advapi32.dll`) that exist on **all Windows 10 & 11 PCs**. The OpenMP runtime (`vcomp140.dll`) is bundled side-by-side.
+- **Hardware-Agnostic Fallback**:
+  - If the laptop has an **NVIDIA GPU**, it automatically runs native CUDA SGEMM AI and VRAM bandwidth benchmarks.
+  - If the laptop has an **Intel Iris Xe, Intel UHD, or AMD Radeon** iGPU, it automatically skips CUDA and runs CPU, RAM, thermal throttling, storage, and buyer checklist tests without errors.
+- **No Administrator Elevation (UAC) Required**: Standard user permissions are sufficient for all WMI telemetry, CPUID probes, and memory benchmarks.
+- **No Internet Required**: Completely self-contained offline evaluation.
 
 ---
 
-## 🚀 Quick Start (60 Seconds)
+## 🚀 Quick Start (For Developers & Students Building from Source)
 
-### Method 1: The One-Click Launcher (Easiest)
-Just clone or download the repository, then double-click:
+If you have Visual Studio 2019/2022 or Build Tools installed and want to build from source:
+
+### Method 1: The One-Click Runner
 ```cmd
+# Clone the repository
+git clone https://github.com/Ajinkya-Furange-Patil/syspulse-laptop-benchmark.git
+cd syspulse-laptop-benchmark
+
+# Auto-compiles and launches the benchmark + browser report
 run.bat
 ```
-> **What happens automatically**:
-> 1. Detects your MSVC C++ compiler and CUDA Toolkit.
-> 2. Compiles the project into `bin\laptop_benchmark.exe` (if not already built).
-> 3. Executes the full hardware evaluation suite.
-> 4. Launches the generated interactive HTML report in your default web browser!
 
----
-
-### Method 2: Command-Line Interface (CLI)
-
-#### 1. Compile the Suite
+### Method 2: Manual Build & CLI Flags
 ```cmd
+# 1. Compile the master suite (auto-detects MSVC and CUDA with CPU fallback)
 build.bat
-```
-*(If NVIDIA CUDA is detected, native GPU kernels are compiled; otherwise, it builds with universal CPU fallback mode automatically!)*
 
-#### 2. Run the Benchmark
-```cmd
-bin\laptop_benchmark.exe
-```
+# 2. Package your own standalone portable USB distribution
+package_portable.bat
 
-#### 3. Custom Flags
-```cmd
-# Run a 30-second sustained stress test with 4096x4096 AI matrix
+# 3. Run with custom benchmark durations
 bin\laptop_benchmark.exe --duration 30 --matrix 4096
 
-# Display help and options
+# 4. Display help
 bin\laptop_benchmark.exe --help
 ```
 
