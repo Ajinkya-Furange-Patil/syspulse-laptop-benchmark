@@ -92,21 +92,18 @@ Go to your repository homepage on GitHub, click the gear icon ⚙️ next to "Ab
 
 ---
 
-## 📦 How to Provide Precompiled Releases for Non-Technical Students
+## 📦 Precompiled Standalone Releases (Live on GitHub)
 
-Most students who are buying a laptop are not C++ developers and do not have Visual Studio or the CUDA SDK installed. You can provide a pre-built portable `.zip` file so they can simply download, extract, and double-click to test their laptop in a shop!
+Release **v1.0.0** is already published on GitHub with the standalone portable ZIP attached:
+👉 **[View SysPulse v1.0.0 Release](https://github.com/Ajinkya-Furange-Patil/syspulse-laptop-benchmark/releases/tag/v1.0.0)**
 
-### Creating a Release:
-1. Run `build.bat` on your PC so `bin/laptop_benchmark.exe` is generated.
-2. Create a folder named `SysPulse-v1.0-Windows-x64/` containing:
-   - `bin/laptop_benchmark.exe`
-   - `run.bat`
-   - `results/` (empty folder)
-   - `README.md`
-   - `LICENSE`
-3. Compress it to `SysPulse-v1.0-Windows-x64.zip`.
-4. Go to **Releases** on your GitHub repository page -> **Draft a new release**.
-5. Tag: `v1.0.0`, Title: `SysPulse v1.0.0 — Standalone Release`.
-6. Attach `SysPulse-v1.0-Windows-x64.zip` as an asset and click **Publish release**.
+To generate new portable releases at any time:
+1. Run `package_portable.bat` in the project root.
+2. It automatically bundles `laptop_benchmark.exe`, `vcomp140.dll`, and `run_portable.bat` into `SysPulse_Portable.zip`.
+3. Create a new release via GitHub CLI:
+   ```powershell
+   gh release create v1.0.1 SysPulse_Portable.zip --title "SysPulse v1.0.1" --notes "Release notes here..."
+   ```
 
 Students can now test any laptop in under 60 seconds without installing compilers!
+
