@@ -1,8 +1,8 @@
 #include <windows.h>
 
 VS_VERSION_INFO VERSIONINFO
-FILEVERSION     1,0,0,0
-PRODUCTVERSION  1,0,0,0
+FILEVERSION     1,1,0,0
+PRODUCTVERSION  1,1,0,0
 FILEFLAGSMASK   VS_FFI_FILEFLAGSMASK
 #ifdef _DEBUG
 FILEFLAGS       VS_FF_DEBUG
@@ -19,12 +19,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName",      "Ajinkya Furange\0"
             VALUE "FileDescription",  "SysPulse: PC Benchmark & 34-Point Laptop Inspection Suite\0"
-            VALUE "FileVersion",      "1.0.0.0\0"
+            VALUE "FileVersion",      "1.1.0.0\0"
             VALUE "InternalName",     "laptop_benchmark.exe\0"
             VALUE "LegalCopyright",   "Copyright (C) 2026 Ajinkya Furange. All rights reserved.\0"
             VALUE "OriginalFilename", "laptop_benchmark.exe\0"
             VALUE "ProductName",      "SysPulse Laptop Benchmark\0"
-            VALUE "ProductVersion",   "1.0.0.0\0"
+            VALUE "ProductVersion",   "1.1.0.0\0"
             VALUE "Comments",         "Hardware capability prober and 34-point laptop buyer checklist engine.\0"
         END
     END

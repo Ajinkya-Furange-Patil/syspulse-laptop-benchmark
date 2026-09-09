@@ -435,7 +435,7 @@ inline void GenerateBuyerHtmlReport(const std::string& filepath,
   <div class="top-banner">
     <div class="title-area">
       <h1>💻 Laptop Technical Buyer's Inspection & Audit</h1>
-      <div style="color: var(--accent); font-size: 13px; font-weight: 600; margin-top: 2px;">Lead Architect & Developer: Ajinkya Furange | SysPulse v1.0.0</div>
+      <div style="color: var(--accent); font-size: 13px; font-weight: 600; margin-top: 2px;">Lead Architect & Developer: Ajinkya Furange | SysPulse v1.1.0</div>
       <div style="color: var(--muted); font-size: 14px; margin-top: 4px;">Evaluated System: <strong>)HTML"
       << sys.cpu.modelName << " | " << sys.gpu.name << R"HTML(</strong></div>
       <div style="margin-top: 10px; font-size: 15px; font-weight: 700; color: )HTML" 

@@ -2,18 +2,19 @@
 
 <div align="center">
 
+[![Version: v1.1.0](https://img.shields.io/badge/Release-v1.1.0-blueviolet?style=for-the-badge&logo=github)](https://github.com/Ajinkya-Furange-Patil/syspulse-laptop-benchmark/releases/tag/v1.1.0)
 [![C++20](https://img.shields.io/badge/Language-C%2B%2B20-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)](https://en.wikipedia.org/wiki/C%2B%2B20)
 [![CUDA](https://img.shields.io/badge/GPU%20Compute-CUDA%2012%2F13-76B900?style=for-the-badge&logo=nvidia&logoColor=white)](https://developer.nvidia.com/cuda-toolkit)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20x64-0078D6?style=for-the-badge&logo=windows&logoColor=white)](https://www.microsoft.com/windows)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=for-the-badge)](CONTRIBUTING.md)
 
-**A single zero-dependency tool to audit, benchmark, and stress-test your PC hardware before buying or tuning.**
+**A single zero-dependency tool to audit, benchmark, and stress-test PC hardware before buying or tuning.**
 
 ### 📥 [Click Here to Download Standalone Executable (SysPulse_Portable.zip)](https://github.com/Ajinkya-Furange-Patil/syspulse-laptop-benchmark/releases/latest/download/SysPulse_Portable.zip)
 *⚡ Zero Setup • No Visual Studio • No Python • No CUDA SDK • No Admin Rights • Runs Completely Offline on Any Laptop!*
 
-[Direct Download](#-download-and-test-in-retail-shops-zero-setup) • [Quick Start](#-quick-start) • [What It Audits](#-what-it-audits-the-34-point-checklist) • [Reports](#-interactive-html-reports) • [Roadmap](#-roadmap--suggestions-for-students)
+[Direct Download](#-download-and-test-in-retail-shops-zero-setup) • [Quick Start](#-quick-start-for-developers--students-building-from-source) • [What It Audits](#-what-it-audits-the-34-point-checklist) • [Buyer Audit Engine](#-syspulse-laptop-buyer-audit-engine-phases-1--22) • [AI Guardrail System](#-ai-operating-manual--guardrail-system-agentsmd--ai) • [Reports](#-interactive-html-reports)
 
 </div>
 
@@ -23,10 +24,11 @@
 
 When students and developers buy a laptop or evaluate their PC, **OEM specification sheets often hide the truth**:
 - Did the manufacturer solder **single-channel RAM** (strangling gaming 1% lows and compilation speeds by up to 35%)?
-- Does the discrete GPU have an anemic **35W TGP** or a full **95W+ power limit**?
+- Does the discrete GPU have an anemic **35W–45W TGP** or a full **95W–140W power limit**?
 - Does the laptop **thermal throttle** after just 30 seconds of heavy compilation or CAD rendering?
-- Will the GPU VRAM fit modern local AI models (**Llama 3 8B, Phi-3, Stable Diffusion**)?
+- Will the GPU VRAM fit modern local AI models (**Llama 3 8B, Phi-3, Stable Diffusion XL**)?
 - Do the CPU and GPU choke each other over a **shared heat-pipe and VRM power budget**?
+- Does the laptop **actively discharge its battery while plugged into the wall** due to an undersized AC adapter?
 
 **SysPulse answers every single one of these questions with a single tool.** In under 60 seconds, it runs low-level hardware probes, microbenchmarks, and cross-stress workloads, delivering an overall score out of 100 alongside an **interactive HTML inspection report**.
 
@@ -42,14 +44,15 @@ If you are visiting a laptop showroom (e.g. Croma, Reliance Digital, Best Buy, o
 1. **Download the Portable Bundle**:
    - Download **[SysPulse_Portable.zip](https://github.com/Ajinkya-Furange-Patil/syspulse-laptop-benchmark/releases/latest/download/SysPulse_Portable.zip)** (only ~360 KB!).
 2. **Copy to Any USB Drive**:
-   - Extract the `.zip` archive and copy the folder onto your USB pendrive.
+   - Extract the `.zip` archive onto your USB thumbdrive.
 3. **Plug & Run on the Demo / New Laptop**:
    - Plug your USB drive into the laptop in the store.
-   - Double-click **`run_portable.bat`** (or `laptop_benchmark.exe`).
+   - Double-click **`SysPulse.exe`**.
    - Wait **30 to 60 seconds** as it stress-tests CPU, RAM, GPU, thermals, and storage.
    - The interactive **34-point Laptop Buyer Inspection Report** will automatically pop up in Microsoft Edge / Chrome!
 
 ### 🛡️ Why It Runs 100% Independently:
+- **Digitally Signed Standalone Binary**: `SysPulse.exe` is signed with the official developer Authenticode certificate (`Ajinkya Furange`) and contains embedded Windows Version Resource metadata.
 - **No External Runtimes Needed**: Relies strictly on native Windows OS libraries (`kernel32.dll`, `user32.dll`, `ole32.dll`, `advapi32.dll`) that exist on **all Windows 10 & 11 PCs**. The OpenMP runtime (`vcomp140.dll`) is bundled side-by-side.
 - **Hardware-Agnostic Fallback**:
   - If the laptop has an **NVIDIA GPU**, it automatically runs native CUDA SGEMM AI and VRAM bandwidth benchmarks.
@@ -112,10 +115,69 @@ Every audit translates raw numbers into scores (0–100) and tiers for:
 
 ---
 
+## 🔬 SysPulse Laptop Buyer Audit Engine (Phases 1 – 22)
+
+In addition to physical hardware benchmarking, SysPulse includes a **22-Phase Laptop Buyer Audit Engine** designed to answer:
+> *"Is this laptop actually engineered for your specific workload, or is it being sold with misleading headline specifications?"*
+
+### 💡 Core Engineering Capabilities:
+1. **Dynamic Architecture & Zero Hardcoding**: Every metric is calculated dynamically from silicon data, OEM firmware limits (PL1/PL2/TGP), microarchitecture IPC tables, and sub-linear power scaling curves ($P^{0.68}$).
+2. **Dedicated Power Delivery & Battery Crossload Engine**: Detects when high-end CPUs and GPUs are throttled by undersized power adapters ($P_{\text{adapter}} < \text{PL1} + \text{TGP} + P_{\text{aux}}$), causing active hybrid battery drain on AC power.
+3. **Hardware Modularity & 5-Year Ownership**: Audits soldered vs SODIMM RAM, M.2 expansion slots, chassis fasteners (Philips vs Torx), glue usage, and predicts 3-to-5 year functional lifespans.
+4. **Hard Deal-Breaker & Bottleneck Engine**: Evaluates non-negotiable capacity cliffs (e.g. 4GB VRAM hard stop for AI/LLMs, single-channel RAM compile bottlenecks, 18ms display ghosting traps) and computes inter-subsystem throughput loss percentages.
+5. **Multi-Domain Workload Scoring (6 Domains)**:
+   - 🎮 **Gaming**: 1080p, 1440p, High-Hz Esports, Ray Tracing, and MUX switch verification.
+   - 🤖 **AI & Local LLMs**: Hard VRAM capacity limits, Llama-3 8B parameter fit, QLoRA fine-tuning viability, Stable Diffusion XL feasibility.
+   - 💻 **Software Development**: Multi-core build compilation, Docker/VM RAM headroom, vertical code display aspect ratio.
+   - ⚙️ **Engineering & CAD**: SolidWorks single-thread viewport, FEA/CFD simulation, AVX-512 acceleration.
+   - 🎨 **Content Creation**: 100% DCI-P3 color gamut, hardware AV1/NVENC dual encoders, 4K timeline scrubbing.
+   - 🔋 **Campus Portability**: True travel weight (chassis + charger), off-charger battery hours, USB-C PD travel charging.
+6. **Anti-Marketing Audit**: Automatically scans promotional headlines for deceptive buzzwords (e.g. *"AI-Powered"*, *"Gaming Beast"*) and cross-examines them against physical hardware realities.
+7. **Hardware Unit Economics & True Value Analysis**: Calculates capability delivered per 10,000 INR (Performance/₹, VRAM/₹, GPU TFLOPs/₹) and identifies overpriced marketing traps.
+8. **Subsystem Confidence & Conflict Resolution**: Ranks data authority (Benchmark > OEM Spec > Teardowns > User Input) and prevents false zero values for missing data.
+9. **Head-to-Head Comparison Engine**: Compares multiple laptops side-by-side across every parameter to declare domain winners.
+10. **Explainable "WHY?" Trees**: Every deduction logs its exact formula, impact, and remediation.
+11. **User-Priority Tailored Final Verdicts**: Enforces the **No Universal Winner** rule—identical hardware can be an `EXCELLENT BUY` for CAD while being a `HARD NO` for local AI.
+
+### 🚀 Audit Engine CLI Commands:
+
+```powershell
+# 1. Audit the physical machine currently running SysPulse (Live Hardware Mode)
+python audit_engine/main.py --live --priority Software_Development --html results/audit_dossier.html
+
+# 2. Audit a specific laptop specification sheet (e.g. for AI research)
+python audit_engine/main.py --file examples/engineered_workstation.json --priority AI_ML
+
+# 3. Compare multiple laptops side-by-side in head-to-head competition
+python audit_engine/main.py --compare examples/deceptive_paper_tiger.json examples/engineered_workstation.json examples/host_physical_laptop.json
+
+# 4. Run the master end-to-end test suite across all 22 engineering phases
+python test_all_phases.py
+```
+
+---
+
+## 🛡️ AI Operating Manual & Guardrail System (`AGENTS.md` & `.ai/`)
+
+SysPulse includes a **strict AI operating contract and guardrail system** to ensure that AI coding assistants operating in this repository preserve architectural rigor, never invent specifications, and adhere to physical evidence:
+
+- [**`AGENTS.md`**](file:///AGENTS.md): The mandatory master entrypoint for AI agents defining non-negotiables, the source-of-truth hierarchy, unknown data policies, and definition of done.
+- [**`.ai/constitution/`**](file:///.ai/constitution): Inviolable engineering principles ([`PROJECT_CONSTITUTION.md`](file:///.ai/constitution/PROJECT_CONSTITUTION.md), [`NON_NEGOTIABLES.md`](file:///.ai/constitution/NON_NEGOTIABLES.md), [`SCOPE.md`](file:///.ai/constitution/SCOPE.md), [`TERMINOLOGY.md`](file:///.ai/constitution/TERMINOLOGY.md)).
+- [**`.ai/architecture/`**](file:///.ai/architecture): Component boundaries, system data flow, and zero-network dependency policies.
+- [**`.ai/engineering/`**](file:///.ai/engineering): Coding standards for C++20 and typed Python, change management, testing rules, and performance engineering.
+- [**`.ai/benchmark/`**](file:///.ai/benchmark): Benchmark validity rules, canonical metric dictionaries, telemetry acquisition, and stress safety.
+- [**`.ai/audit/`**](file:///.ai/audit): Scoring philosophy, deal-breaker rules, confidence tracking, anti-marketing verification, and workload models.
+- [**`.ai/agent/`**](file:///.ai/agent): Step-by-step agent workflow, reconnaissance checklists, and mandatory stop conditions.
+- [**`.ai/decisions/`**](file:///.ai/decisions): Architectural Decision Records ([ADR-001](file:///.ai/decisions/ADR-001-scoring-model.md) through [ADR-005](file:///.ai/decisions/ADR-005-offline-portability.md)).
+- [**`.ai/tasks/`**](file:///.ai/tasks): Task specification templates and persistent AI engineering changelog ([`AI_CHANGELOG.md`](file:///.ai/tasks/AI_CHANGELOG.md)).
+
+---
+
 ## 📊 Interactive HTML Reports
 
-Upon completion, SysPulse automatically exports and opens:
-- 📄 **`results/laptop_buyer_inspection.html`**: Complete 34-point scorecard with interactive category and status filter buttons (`[All]`, `[Pass]`, `[Caution]`, `[Dealbreaker]`), pros/cons lists, and upgrade advice.
+Upon completion, SysPulse exports rich, zero-external-CDN standalone reports:
+- 📄 **`results/laptop_buyer_inspection.html`**: Complete 34-point native scorecard with interactive category filter buttons (`[All]`, `[Pass]`, `[Caution]`, `[Dealbreaker]`), pros/cons lists, and upgrade advice.
+- 📄 **`results/audit_dossier.html`**: Complete technical buyer dossier with domain scorecards, deal-breaker cards, anti-marketing audits, and future-proofing projections.
 - 📄 **`results/performance_report.html`**: Technical benchmark report detailing compute TFLOPs, memory bandwidth, latency, and thermal curves.
 - 💾 **`results/laptop_buyer_audit.json`**: Machine-readable JSON telemetry for automated analysis or comparisons.
 
@@ -125,19 +187,46 @@ Upon completion, SysPulse automatically exports and opens:
 
 ```
 SysPulse/
-├── .gitattributes              # Line-ending and Git normalization
-├── .gitignore                  # Clean repository filter (ignores bins/objs/dumps)
-├── LICENSE                     # MIT Open Source License
-├── README.md                   # This documentation
-├── CONTRIBUTING.md             # Developer & student contribution guide
-├── CMakeLists.txt              # Cross-IDE CMake configuration
-├── build.bat                   # Master 1-click intelligent compiler (MSVC + CUDA / CPU)
-├── run.bat                     # Master 1-click runner (auto-builds + opens report)
-├── clean.bat                   # Utility script to clean bin/ and build/ folders
-├── docs/                       # Detailed guides and specifications
-│   ├── ARCHITECTURE.md         # Engine architecture, WMI prober & kernel design
-│   ├── BUYER_AUDIT_SPEC.md     # In-depth breakdown of all 34 hardware checkpoints
-│   └── GITHUB_PUBLISH_GUIDE.md # Step-by-step guide to push this repo to GitHub
+├── AGENTS.md                   # Canonical AI engineering contract (Master Entrypoint)
+├── CLAUDE.md                   # Anthropic Claude compatibility pointer
+├── GEMINI.md                   # Google Gemini compatibility pointer
+├── .github/
+│   └── copilot-instructions.md # GitHub Copilot compatibility pointer
+├── .ai/                        # AI Operating Manual & Guardrail System
+│   ├── README.md               # Guardrail overview and index
+│   ├── constitution/           # Inviolable philosophy & non-negotiables
+│   ├── architecture/           # Component boundaries & dependency policy
+│   ├── engineering/            # C++20 & Python coding rules, change policy
+│   ├── benchmark/              # Benchmark philosophy, metrics & telemetry
+│   ├── audit/                  # Scoring rules, deal-breakers & confidence
+│   ├── agent/                  # 8-phase workflow & stop conditions
+│   ├── decisions/              # Architecture Decision Records (ADR-001 to 005)
+│   └── tasks/                  # Task templates & persistent AI changelog
+├── audit_engine/               # 22-Phase Python Laptop Buyer Audit Engine
+│   ├── models.py               # Strongly typed data models with AuditField[T]
+│   ├── validator.py            # Draft-07 schema validator & sanity auditor
+│   ├── db.py                   # 3NF relational SQLite catalog manager
+│   ├── power_analyzer.py       # Crossload power deficit & battery drain model
+│   ├── upgradeability.py       # RAM/SSD modularity & 5-year ownership predictor
+│   ├── performance_engine.py   # IPC microarch scaling & sustained throttling
+│   ├── benchmark_connector.py  # Ingestion connector for native results/ telemetry
+│   ├── workload_engine.py      # 6-domain suitability scoring (Gaming, AI, Dev...)
+│   ├── dealbreaker_engine.py   # Fatal blocker & bottleneck throughput loss
+│   ├── value_engine.py         # Hardware unit economics (Perf/₹, VRAM/₹)
+│   ├── confidence_engine.py    # Provenance tracking & conflict resolution
+│   ├── anti_marketing.py       # Buzzword scan vs silicon reality cross-examination
+│   ├── future_proofing.py      # 1/3/5-year horizons & tailored verdicts
+│   ├── comparator.py           # Multi-laptop head-to-head comparison
+│   ├── report_generator.py     # Markdown & standalone interactive HTML dossiers
+│   ├── main.py                 # Master CLI orchestrator
+│   └── test_phase*.py          # Granular phase test harnesses
+├── schemas/
+│   └── laptop_schema.json      # Draft-07 JSON specification schema contract
+├── examples/                   # Audited laptop specification test fixtures
+│   ├── deceptive_paper_tiger.json
+│   ├── engineered_workstation.json
+│   ├── host_physical_laptop.json
+│   └── severe_power_deficit.json
 ├── include/                    # Core C++ header modules
 │   ├── sys_detect.hpp          # Win32 WMI & CPUID hardware probing
 │   ├── ram_bench.hpp           # Streaming memory bandwidth & latency benchmarks
@@ -148,74 +237,21 @@ SysPulse/
 │   ├── main.cpp                # Master unified benchmark runner
 │   ├── cuda_kernels.cu         # Native CUDA kernels (SGEMM, GELU, VRAM streaming)
 │   ├── cuda_stub.cpp           # Transparent fallback for systems without CUDA
-│   └── phases/                 # Granular individual test modules
-│       ├── phase0_audit/       # Hardware topology probe binary
-│       ├── phase1_baseline/    # System idle calibration
-│       ├── phase2_cpu_single/  # AVX-512 single-core microbenchmark
-│       ├── phase3_cpu_multi/   # OpenMP multi-thread scalability benchmark
-│       └── phase4_cpu_sustained/# 60-second thermal degradation test
-├── scripts/                    # Modular build scripts for individual phases
-│   └── build_phases/           # Individual phase build runners (Phase 0 to 4)
-└── results/                    # Output directory for HTML and JSON reports
-    └── .gitkeep
-```
-
----
-
-## 💡 Roadmap & Suggestions for Students
-
-If you are a student or developer looking to expand this project or build high-impact portfolio features, here are 7 recommended enhancements:
-
-1. 🌐 **DirectX 12 / DirectML GPU Support**:
-   - *Goal*: Add a fallback compute kernel using DirectML or DirectCompute so AMD Radeon and Intel Arc / Iris Xe GPUs can be benchmarked for TFLOPs without NVIDIA CUDA.
-2. 💾 **CrystalDiskMark-Style Disk Stress**:
-   - *Goal*: Benchmark sequential and 4K random read/write speeds, verify NVMe cache endurance, and check for SLC cache drop-offs during prolonged file transfers.
-3. 🔋 **Battery Drain & Efficiency Benchmark**:
-   - *Goal*: Query battery discharge rate (in milliwatts via `GetSystemPowerStatus`) during active stress to compute a **Performance-per-Watt (PPW)** score and estimate real campus battery life.
-4. 🖥️ **Display & Peripherals QA Helper**:
-   - *Goal*: Include an interactive full-screen dead-pixel checker, screen refresh rate validator, and keyboard ghosting diagnostic (ideal for students buying second-hand laptops).
-5. 🖨️ **1-Click PDF Report Export**:
-   - *Goal*: Add a print-ready CSS stylesheet and PDF generation trigger in the HTML report so students can attach inspection reports when negotiating prices or claiming warranties.
-6. 🌍 **Community Benchmark Leaderboard**:
-   - *Goal*: Allow users to voluntarily upload anonymized JSON telemetry to a public GitHub Discussions thread or web API to compare scores against identical laptop models globally.
-7. 🎛️ **Lightweight Native GUI (ImGui / Tauri)**:
----
-
-## 🔬 SysPulse Laptop Buyer Audit Engine (Phases 1 – 22)
-
-In addition to physical hardware benchmarking, SysPulse includes a **Laptop Buyer Audit Engine** designed to answer:
-> *"Is this laptop actually engineered for your specific workload, or is it a paper tiger being sold with misleading headline specifications?"*
-
-### 💡 Core Capabilities:
-1. **Dynamic Architecture & Zero Hardcoding**: Every metric is calculated dynamically from silicon data, OEM firmware limits (PL1/PL2/TGP), and physics curves.
-2. **Dedicated Power Delivery & Battery Crossload Engine**: Detects when high-end CPUs and GPUs are throttled by undersized power adapters ($P_{\text{adapter}} < \text{PL1} + \text{TGP} + \text{Aux}$), causing battery drain on AC power.
-3. **Hardware Modularity & 5-Year Ownership**: Audits soldered vs SODIMM RAM, M.2 expansion slots, screw types, and predicts 3-to-5 year functional lifespans.
-4. **Hard Deal-Breaker & Bottleneck Engine**: Evaluates non-negotiable capacity cliffs (e.g. 4GB VRAM hard stop for AI/LLMs, single-channel RAM compile bottlenecks, 24ms display ghosting traps).
-5. **Multi-Domain Workload Scoring**:
-   - 🎮 **Gaming**: 1080p, 1440p, High-Hz Esports, Ray Tracing, and MUX switch verification.
-   - 🤖 **AI & Local LLMs**: Hard VRAM capacity limits, Llama-3 8B parameter fit, QLoRA fine-tuning viability, Stable Diffusion XL feasibility.
-   - 💻 **Software Development**: Multi-core build compilation, Docker/VM RAM headroom, vertical code display aspect ratio.
-   - ⚙️ **Engineering & CAD**: SolidWorks single-thread viewport, FEA/CFD simulation, AVX-512 acceleration.
-   - 🎨 **Content Creation**: 100% DCI-P3 color gamut, hardware AV1/NVENC dual encoders, 4K timeline scrubbing.
-   - 🔋 **Campus Portability**: True travel weight (chassis + charger), off-charger battery hours, USB-C PD travel charging.
-6. **Anti-Marketing Audit**: Automatically flags buzzwords like *"AI-Powered"* or *"Gaming Beast"* and cross-examines them against cold physical hardware realities.
-7. **Head-to-Head Comparison Engine**: Compares multiple laptops side-by-side across every parameter to declare domain winners.
-8. **Explainable "WHY?" Trees**: Every deduction logs its exact formula, impact, and remediation.
-
-### 🚀 Audit Engine Quick Run Commands:
-
-```powershell
-# 1. Audit the physical machine currently running SysPulse (Live Hardware Mode)
-python audit_engine/main.py --live --priority Software_Development --html results/audit_dossier.html
-
-# 2. Audit a specific laptop specification sheet (e.g. for AI research)
-python audit_engine/main.py --file examples/engineered_workstation.json --priority AI_ML
-
-# 3. Compare multiple laptops side-by-side
-python audit_engine/main.py --compare examples/deceptive_paper_tiger.json examples/engineered_workstation.json examples/host_physical_laptop.json
-
-# 4. Run the master end-to-end test suite across all 22 engineering phases
-python test_all_phases.py
+│   └── version.rc              # Windows PE Version resource (v1.1.0 metadata)
+├── SysPulse_Portable/          # Clean retail USB distribution folder
+│   ├── SysPulse.exe            # Digitally signed 64-bit benchmark executable
+│   ├── vcomp140.dll            # Bundled OpenMP runtime DLL
+│   └── results/                # Output directory for HTML and JSON reports
+├── SysPulse_Portable.zip       # Standalone ~360 KB portable USB archive
+├── test_all_phases.py          # Master verification suite across all 22 phases
+├── build.bat                   # Master intelligent compiler (MSVC + CUDA / CPU)
+├── run.bat                     # Master 1-click runner (auto-builds + opens report)
+├── clean.bat                   # Clean bin/ and build/ folders
+├── package_portable.bat        # Automated portable packager and code signer
+├── CMakeLists.txt              # Cross-IDE CMake configuration
+├── CONTRIBUTING.md             # Developer & student contribution guide
+├── LICENSE                     # MIT Open Source License
+└── results/                    # Runtime benchmark output folder (.gitkeep)
 ```
 
 ---
@@ -225,15 +261,16 @@ python test_all_phases.py
 | Component | Minimum | Recommended |
 | :--- | :--- | :--- |
 | **Operating System** | Windows 10 / 11 (64-bit) | Windows 11 (64-bit) |
-| **Compiler** | Visual Studio 2019 / 2022 Build Tools (with C++ Desktop workload) | Visual Studio 2022 Community / Build Tools |
+| **Compiler (From Source)** | Visual Studio 2019 / 2022 Build Tools (with C++ Desktop workload) | Visual Studio 2022 Community / Build Tools |
 | **GPU Acceleration** | Any integrated or discrete GPU (Universal CPU mode enabled) | NVIDIA GeForce / RTX GPU with CUDA Toolkit 12.x or 13.x |
 | **RAM** | 4 GB | 16 GB+ |
+| **Portable Binary** | Standalone `SysPulse.exe` (Runs on any Windows 10/11 x64 PC with zero dependencies) |
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on code style, submitting issues, and opening pull requests.
+Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) and [AGENTS.md](AGENTS.md) for guidelines on code style, submitting issues, and opening pull requests.
 
 ---
 
@@ -241,4 +278,4 @@ Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for gu
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
-Developed with ❤️ by **Ajinkya Patil** for students, developers, and hardware enthusiasts worldwide.
+Developed with ❤️ by **Ajinkya Furange** for students, developers, and hardware enthusiasts worldwide.
