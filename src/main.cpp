@@ -262,9 +262,23 @@ int main(int argc, char* argv[]) {
         std::cout << "[INFO] Buyer Audit Data exported to: results/laptop_buyer_audit.json\n";
     }
 
+    std::cout << "\n========================================================================================\n";
+    std::cout << " [SUCCESS] Benchmark Complete! Opening interactive report in browser...\n";
+    std::cout << "========================================================================================\n";
+
     // Automatically launch interactive HTML inspection report in default browser
-    ShellExecuteA(NULL, "open", "results\\laptop_buyer_inspection.html", NULL, NULL, SW_SHOWNORMAL);
+    char fullPath[MAX_PATH] = {0};
+    GetFullPathNameA("results\\laptop_buyer_inspection.html", MAX_PATH, fullPath, NULL);
+    HINSTANCE hInst = ShellExecuteA(NULL, "open", fullPath, NULL, NULL, SW_SHOWNORMAL);
+    if ((INT_PTR)hInst <= 32) {
+        system("start \"\" \"results\\laptop_buyer_inspection.html\"");
+    }
+
+    std::cout << "\nPress Enter to exit...\n";
+    std::cin.ignore(std::cin.rdbuf()->in_avail());
+    std::cin.get();
 
     return 0;
 }
+
 

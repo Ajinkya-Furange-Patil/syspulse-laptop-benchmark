@@ -3,7 +3,7 @@ setlocal
 cd /d "%~dp0"
 
 echo =======================================================================
-echo   SYSPULSE: PACKAGE STANDALONE PORTABLE RUNNER FOR USB AND RETAIL SHOPS
+echo   SYSPULSE: PACKAGE CLEAN STANDALONE RUNNER
 echo =======================================================================
 
 :: 1. Ensure master binary is built
@@ -26,70 +26,34 @@ if not exist "bin\vcomp140.dll" (
     )
 )
 
-:: 3. Create SysPulse_Portable directory
+:: 3. Create clean SysPulse_Portable directory
 set "PORTABLE_DIR=SysPulse_Portable"
 if exist "%PORTABLE_DIR%" rmdir /s /q "%PORTABLE_DIR%"
 mkdir "%PORTABLE_DIR%"
 mkdir "%PORTABLE_DIR%\results"
 
-echo [1/4] Copying executable and runtime DLLs...
+echo [1/3] Copying standalone SysPulse.exe and runtime DLL...
 copy /y "bin\laptop_benchmark.exe" "%PORTABLE_DIR%\SysPulse.exe" >nul
-copy /y "bin\laptop_benchmark.exe" "%PORTABLE_DIR%\laptop_benchmark.exe" >nul
 if exist "bin\vcomp140.dll" copy /y "bin\vcomp140.dll" "%PORTABLE_DIR%\" >nul
 
-echo [2/4] Signing portable executable with Ajinkya Furange certificate...
+echo [2/3] Signing portable SysPulse.exe with Ajinkya Furange digital signature...
 if exist "scripts\sign_binary.ps1" (
     powershell -NoProfile -ExecutionPolicy Bypass -File "scripts\sign_binary.ps1" "%PORTABLE_DIR%\SysPulse.exe"
-    powershell -NoProfile -ExecutionPolicy Bypass -File "scripts\sign_binary.ps1" "%PORTABLE_DIR%\laptop_benchmark.exe"
 )
 
-echo [3/4] Generating portable runner script and instructions...
-echo @echo off > "%PORTABLE_DIR%\run_portable.bat"
-echo setlocal >> "%PORTABLE_DIR%\run_portable.bat"
-echo cd /d "%%~dp0" >> "%PORTABLE_DIR%\run_portable.bat"
-echo echo ======================================================================= >> "%PORTABLE_DIR%\run_portable.bat"
-echo echo   SYSPULSE PORTABLE: 34-POINT LAPTOP BUYER INSPECTION RUNNER >> "%PORTABLE_DIR%\run_portable.bat"
-echo echo ======================================================================= >> "%PORTABLE_DIR%\run_portable.bat"
-echo echo Running standalone hardware audit and stress test... >> "%PORTABLE_DIR%\run_portable.bat"
-echo echo No installation, no internet, and no admin rights required! >> "%PORTABLE_DIR%\run_portable.bat"
-echo echo. >> "%PORTABLE_DIR%\run_portable.bat"
-echo if not exist "results" mkdir results >> "%PORTABLE_DIR%\run_portable.bat"
-echo SysPulse.exe %%* >> "%PORTABLE_DIR%\run_portable.bat"
-echo echo. >> "%PORTABLE_DIR%\run_portable.bat"
-echo echo [INFO] Inspection complete! >> "%PORTABLE_DIR%\run_portable.bat"
-echo if exist "results\laptop_buyer_inspection.html" start "" "results\laptop_buyer_inspection.html" >> "%PORTABLE_DIR%\run_portable.bat"
-echo pause >> "%PORTABLE_DIR%\run_portable.bat"
-
-echo ======================================================================= > "%PORTABLE_DIR%\HOW_TO_USE.txt"
-echo   SYSPULSE PORTABLE - QUICK INSTRUCTIONS FOR BUYING A LAPTOP >> "%PORTABLE_DIR%\HOW_TO_USE.txt"
-echo ======================================================================= >> "%PORTABLE_DIR%\HOW_TO_USE.txt"
-echo Author: Ajinkya Furange >> "%PORTABLE_DIR%\HOW_TO_USE.txt"
-echo. >> "%PORTABLE_DIR%\HOW_TO_USE.txt"
-echo 1. Copy this entire SysPulse_Portable folder onto a USB pendrive. >> "%PORTABLE_DIR%\HOW_TO_USE.txt"
-echo 2. Plug the USB drive into the new or demo laptop in the shop. >> "%PORTABLE_DIR%\HOW_TO_USE.txt"
-echo 3. Double-click 'SysPulse.exe' (or 'run_portable.bat'). >> "%PORTABLE_DIR%\HOW_TO_USE.txt"
-echo 4. Wait ~30 to 60 seconds while it audits: >> "%PORTABLE_DIR%\HOW_TO_USE.txt"
-echo      * Real CPU physical vs logical cores and AVX-512 support >> "%PORTABLE_DIR%\HOW_TO_USE.txt"
-echo      * Single-channel vs Dual-channel RAM bottleneck >> "%PORTABLE_DIR%\HOW_TO_USE.txt"
-echo      * Real GPU TGP, VRAM capacity, and local AI model fit >> "%PORTABLE_DIR%\HOW_TO_USE.txt"
-echo      * Thermal throttling, cooling efficiency, and sustained power >> "%PORTABLE_DIR%\HOW_TO_USE.txt"
-echo      * NVMe storage read speed >> "%PORTABLE_DIR%\HOW_TO_USE.txt"
-echo 5. Review the 34-point scorecard and dealbreakers that open >> "%PORTABLE_DIR%\HOW_TO_USE.txt"
-echo    automatically in the web browser! >> "%PORTABLE_DIR%\HOW_TO_USE.txt"
-echo. >> "%PORTABLE_DIR%\HOW_TO_USE.txt"
-echo NOTE: No internet connection, admin privileges, or setup required. >> "%PORTABLE_DIR%\HOW_TO_USE.txt"
-
-echo [4/4] Creating standalone ZIP archive...
+echo [3/3] Creating standalone ZIP archive...
 powershell -Command "if (Test-Path 'SysPulse_Portable.zip') { Remove-Item 'SysPulse_Portable.zip' -Force }; Compress-Archive -Path 'SysPulse_Portable\*' -DestinationPath 'SysPulse_Portable.zip'"
 
 echo.
 echo =======================================================================
-echo   PORTABLE PACKAGE CREATED SUCCESSFULLY!
+echo   CLEAN PORTABLE PACKAGE READY!
 echo =======================================================================
 echo   Folder:  SysPulse_Portable\
 echo   Archive: SysPulse_Portable.zip
 echo.
-echo You can now copy 'SysPulse_Portable.zip' or the folder to any USB drive
-echo and run it on ANY new laptop out of the box!
+echo Standalone folder contains ONLY:
+echo   - SysPulse.exe  (Double-click to run - opens report in browser automatically)
+echo   - vcomp140.dll  (Bundled runtime)
+echo   - results\      (Output directory)
 echo =======================================================================
 pause
