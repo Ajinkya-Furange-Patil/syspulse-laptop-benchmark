@@ -21,8 +21,13 @@ out/
 results/*
 !results/.gitkeep
 
+# Standalone Portable Distribution packages
+SysPulse_Portable/
+*.zip
+
 # System & OS temporary files
 Thumbs.db
 Desktop.ini
 *.log
 *.tmp
+
