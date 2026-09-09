@@ -1,0 +1,28 @@
+# Binaries and build outputs
+bin/
+build/
+*.exe
+*.obj
+*.pdb
+*.ilk
+*.idb
+*.exp
+*.lib
+
+# IDE & Editor specific files
+.vs/
+.vscode/
+*.vcxproj.user
+CMakeSettings.json
+out/
+
+# Dynamic/Temporary Benchmark runtime outputs
+# (We preserve .gitkeep in results/ so the directory exists for users)
+results/*
+!results/.gitkeep
+
+# System & OS temporary files
+Thumbs.db
+Desktop.ini
+*.log
+*.tmp

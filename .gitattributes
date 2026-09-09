@@ -1,0 +1,20 @@
+# Auto-detect text files and normalize line endings to LF on commit
+* text=auto
+
+# Windows batch files must retain CRLF for proper command shell execution
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# C++ Source and Header files
+*.cpp text eol=lf
+*.hpp text eol=lf
+*.cu text eol=lf
+*.cuh text eol=lf
+*.h text eol=lf
+*.c text eol=lf
+
+# Documentation
+*.md text eol=lf
+*.txt text eol=lf
+*.json text eol=lf
+*.html text eol=lf
