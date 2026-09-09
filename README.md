@@ -179,7 +179,44 @@ If you are a student or developer looking to expand this project or build high-i
 6. 🌍 **Community Benchmark Leaderboard**:
    - *Goal*: Allow users to voluntarily upload anonymized JSON telemetry to a public GitHub Discussions thread or web API to compare scores against identical laptop models globally.
 7. 🎛️ **Lightweight Native GUI (ImGui / Tauri)**:
-   - *Goal*: Build a modern desktop GUI showing live real-time graphs of CPU/GPU clock speeds, fan speeds, temperatures, and power draw during testing.
+---
+
+## 🔬 SysPulse Laptop Buyer Audit Engine (Phases 1 – 22)
+
+In addition to physical hardware benchmarking, SysPulse includes a **Laptop Buyer Audit Engine** designed to answer:
+> *"Is this laptop actually engineered for your specific workload, or is it a paper tiger being sold with misleading headline specifications?"*
+
+### 💡 Core Capabilities:
+1. **Dynamic Architecture & Zero Hardcoding**: Every metric is calculated dynamically from silicon data, OEM firmware limits (PL1/PL2/TGP), and physics curves.
+2. **Dedicated Power Delivery & Battery Crossload Engine**: Detects when high-end CPUs and GPUs are throttled by undersized power adapters ($P_{\text{adapter}} < \text{PL1} + \text{TGP} + \text{Aux}$), causing battery drain on AC power.
+3. **Hardware Modularity & 5-Year Ownership**: Audits soldered vs SODIMM RAM, M.2 expansion slots, screw types, and predicts 3-to-5 year functional lifespans.
+4. **Hard Deal-Breaker & Bottleneck Engine**: Evaluates non-negotiable capacity cliffs (e.g. 4GB VRAM hard stop for AI/LLMs, single-channel RAM compile bottlenecks, 24ms display ghosting traps).
+5. **Multi-Domain Workload Scoring**:
+   - 🎮 **Gaming**: 1080p, 1440p, High-Hz Esports, Ray Tracing, and MUX switch verification.
+   - 🤖 **AI & Local LLMs**: Hard VRAM capacity limits, Llama-3 8B parameter fit, QLoRA fine-tuning viability, Stable Diffusion XL feasibility.
+   - 💻 **Software Development**: Multi-core build compilation, Docker/VM RAM headroom, vertical code display aspect ratio.
+   - ⚙️ **Engineering & CAD**: SolidWorks single-thread viewport, FEA/CFD simulation, AVX-512 acceleration.
+   - 🎨 **Content Creation**: 100% DCI-P3 color gamut, hardware AV1/NVENC dual encoders, 4K timeline scrubbing.
+   - 🔋 **Campus Portability**: True travel weight (chassis + charger), off-charger battery hours, USB-C PD travel charging.
+6. **Anti-Marketing Audit**: Automatically flags buzzwords like *"AI-Powered"* or *"Gaming Beast"* and cross-examines them against cold physical hardware realities.
+7. **Head-to-Head Comparison Engine**: Compares multiple laptops side-by-side across every parameter to declare domain winners.
+8. **Explainable "WHY?" Trees**: Every deduction logs its exact formula, impact, and remediation.
+
+### 🚀 Audit Engine Quick Run Commands:
+
+```powershell
+# 1. Audit the physical machine currently running SysPulse (Live Hardware Mode)
+python audit_engine/main.py --live --priority Software_Development --html results/audit_dossier.html
+
+# 2. Audit a specific laptop specification sheet (e.g. for AI research)
+python audit_engine/main.py --file examples/engineered_workstation.json --priority AI_ML
+
+# 3. Compare multiple laptops side-by-side
+python audit_engine/main.py --compare examples/deceptive_paper_tiger.json examples/engineered_workstation.json examples/host_physical_laptop.json
+
+# 4. Run the master end-to-end test suite across all 22 engineering phases
+python test_all_phases.py
+```
 
 ---
 

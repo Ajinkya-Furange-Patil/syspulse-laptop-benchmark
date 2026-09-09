@@ -1,0 +1,163 @@
+{
+  "metadata": {
+    "brand": "OverclockerBudget",
+    "series": "TitanStrike 16",
+    "model_name": "TitanStrike Extreme 16",
+    "exact_sku": "OB-TITAN16-I9-4070-135W",
+    "release_year": 2024,
+    "msrp_inr": 149990.0,
+    "street_price_inr": 129990.0,
+    "msrp_usd": 1599.0,
+    "target_audience": "Gamer / Video Editor",
+    "marketing_headline": "Flagship Core i9-13900H with RTX 4070 Graphics and 240Hz Gaming Display"
+  },
+  "chassis": {
+    "weight_kg": { "value": 2.2, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "dimensions_mm": {
+      "width": 360.0,
+      "depth": 255.0,
+      "thickness_min": 19.9,
+      "thickness_max": 22.0
+    },
+    "chassis_materials": "Plastic Chassis",
+    "service_access": {
+      "easy_access_panel": false,
+      "screw_type": "PHILIPS",
+      "chassis_pry_difficulty": "MODERATE"
+    }
+  },
+  "cpu": {
+    "manufacturer": "Intel",
+    "exact_model": "Intel Core i9-13900H",
+    "architecture": "Raptor Lake",
+    "generation": "13th Gen",
+    "process_node_nm": 10.0,
+    "total_physical_cores": 14,
+    "performance_cores": 6,
+    "efficiency_cores": 8,
+    "total_threads": 20,
+    "base_clock_ghz": 2.6,
+    "boost_clock_ghz": 5.4,
+    "all_core_boost_ghz": { "value": 4.5, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "cache": {
+      "l2_total_mb": 11.5,
+      "l3_total_mb": 24.0
+    },
+    "intel_or_amd_spec_base_power_w": 45.0,
+    "intel_or_amd_spec_max_turbo_w": 115.0,
+    "oem_pl1_w": { "value": 65.0, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "oem_pl2_w": { "value": 115.0, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "oem_tau_seconds": { "value": 28.0, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "npu_present": false,
+    "npu_tops": { "value": 0.0, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "instruction_extensions": {
+      "avx2": true,
+      "avx512": false,
+      "avx10": false,
+      "amx": false,
+      "arm_neon": false
+    },
+    "igpu_model": "Intel Iris Xe Graphics (96 EUs)",
+    "pcie_controller_gen": 4,
+    "undervolting_supported": { "value": false, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 }
+  },
+  "gpu": {
+    "is_discrete": true,
+    "manufacturer": "NVIDIA",
+    "exact_model": "NVIDIA GeForce RTX 4070 Laptop GPU",
+    "chip_code": "AD106",
+    "architecture": "Ada Lovelace",
+    "cuda_cores_or_stream_processors": 4608,
+    "tensor_cores": 144,
+    "rt_cores": 36,
+    "vram_gb": 8.0,
+    "vram_type": "GDDR6",
+    "memory_bus_width_bit": { "value": 128, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "memory_bandwidth_gbps": { "value": 256.0, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "silicon_max_possible_tgp_w": 140.0,
+    "oem_base_tgp_w": { "value": 85.0, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "oem_dynamic_boost_w": { "value": 20.0, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "oem_total_max_tgp_w": { "value": 105.0, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "graphics_clock_base_mhz": { "value": 1605, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "graphics_clock_boost_mhz": { "value": 1980, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "has_mux_switch": { "value": true, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "advanced_optimus": { "value": false, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "gsync_display_support": { "value": true, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "video_encoders": {
+      "nvenc_version": "8th Gen (Ada)",
+      "av1_encode_hardware": true,
+      "dual_encoders": false
+    },
+    "cuda_compute_capability": "8.9"
+  },
+  "memory": {
+    "total_capacity_gb": 32,
+    "ram_type": "DDR5",
+    "speed_mts": 5200,
+    "channel_configuration": "DUAL_CHANNEL",
+    "bus_width_bits": { "value": 128, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "soldered_capacity_gb": 0,
+    "sodimm_slots_total": 2,
+    "sodimm_slots_occupied": 2,
+    "max_supported_capacity_gb": 64,
+    "cas_latency_cl": { "value": 42, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "measured_read_bandwidth_gbps": { "value": 72.0, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 }
+  },
+  "storage": {
+    "total_capacity_gb": 1024,
+    "m2_slots_total": 2,
+    "m2_slots_occupied": 1,
+    "primary_drive": {
+      "exact_ssd_model": { "value": "Mid-tier Gen4 NVMe", "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+      "capacity_gb": 1024,
+      "form_factor": "M.2_2280",
+      "interface_type": "NVMe_PCIe",
+      "pcie_generation": 4,
+      "pcie_lanes": 4,
+      "nand_type": "TLC",
+      "has_dram_cache": { "value": false, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+      "sequential_read_mbps": { "value": 5000.0, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+      "sequential_write_mbps": { "value": 4000.0, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+      "sustained_write_throttle_observed": { "value": false, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 }
+    }
+  },
+  "display": {
+    "diagonal_inches": 16.0,
+    "aspect_ratio": "16:10",
+    "resolution_horizontal": 2560,
+    "resolution_vertical": 1600,
+    "refresh_rate_hz": 240,
+    "panel_technology": "IPS",
+    "advertised_brightness_nits": 400.0,
+    "measured_brightness_nits": { "value": 395.0, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "contrast_ratio": { "value": 1100.0, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "response_time_gtg_ms": { "value": 5.5, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "color_gamut_srgb_pct": { "value": 100.0, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "color_gamut_dci_p3_pct": { "value": 78.0, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "delta_e_accuracy": { "value": 1.8, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "vrr_technology": "G_SYNC",
+    "pwm_flicker_free": { "value": true, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "pwm_frequency_hz": { "value": 0.0, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "surface_finish": "MATTE_ANTI_GLARE"
+  },
+  "cooling": {
+    "fan_count": 2,
+    "heatpipe_count": { "value": 3, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "heatpipe_topology": "SHARED_HEATPIPES",
+    "has_vapor_chamber": false,
+    "thermal_interface_material": "STANDARD_PASTE",
+    "exhaust_vents_count": 2,
+    "vrm_actively_cooled": { "value": true, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "vram_actively_cooled": { "value": true, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "rated_thermal_dissipation_watts": { "value": 130.0, "status": "ESTIMATED", "source": "COMMUNITY_DATABASE", "confidence": 0.8 },
+    "measured_noise_dba_max_load": { "value": 53.0, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 }
+  },
+  "power": {
+    "battery_capacity_wh": 54.0,
+    "adapter_rating_w": 135.0,
+    "adapter_form_factor": "STANDARD_BARREL",
+    "usb_c_pd_charging_supported": false,
+    "usb_c_pd_max_input_w": null,
+    "battery_discharge_under_ac_crossload": { "value": true, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 }
+  }
+}

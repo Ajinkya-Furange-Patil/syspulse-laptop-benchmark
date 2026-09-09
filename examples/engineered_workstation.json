@@ -1,0 +1,163 @@
+{
+  "metadata": {
+    "brand": "ProTitan",
+    "series": "Vector Pro 16",
+    "model_name": "Vector Pro 16 G2",
+    "exact_sku": "PT-VEC16-14700HX-4060",
+    "release_year": 2024,
+    "msrp_inr": 159990.0,
+    "street_price_inr": 144990.0,
+    "msrp_usd": 1799.0,
+    "target_audience": "Engineers, AI Researchers, Hardcore Gamers",
+    "marketing_headline": "Full-Power Max-P RTX 4060 140W with i7-14700HX and 240Hz 500-nit Calibrated Display"
+  },
+  "chassis": {
+    "weight_kg": { "value": 2.45, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "dimensions_mm": {
+      "width": 363.0,
+      "depth": 260.0,
+      "thickness_min": 22.0,
+      "thickness_max": 25.4
+    },
+    "chassis_materials": "Anodized Aluminum CNC Top and Magnesium-Aluminum Keyboard Deck",
+    "service_access": {
+      "easy_access_panel": false,
+      "screw_type": "PHILIPS",
+      "chassis_pry_difficulty": "EASY"
+    }
+  },
+  "cpu": {
+    "manufacturer": "Intel",
+    "exact_model": "Intel Core i7-14700HX",
+    "architecture": "Raptor Lake Refresh",
+    "generation": "14th Gen",
+    "process_node_nm": 10.0,
+    "total_physical_cores": 20,
+    "performance_cores": 8,
+    "efficiency_cores": 12,
+    "total_threads": 28,
+    "base_clock_ghz": 2.1,
+    "boost_clock_ghz": 5.5,
+    "all_core_boost_ghz": { "value": 4.8, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "cache": {
+      "l2_total_mb": 28.0,
+      "l3_total_mb": 33.0
+    },
+    "intel_or_amd_spec_base_power_w": 55.0,
+    "intel_or_amd_spec_max_turbo_w": 157.0,
+    "oem_pl1_w": { "value": 90.0, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "oem_pl2_w": { "value": 140.0, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "oem_tau_seconds": { "value": 56.0, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "npu_present": false,
+    "npu_tops": { "value": 0.0, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "instruction_extensions": {
+      "avx2": true,
+      "avx512": false,
+      "avx10": false,
+      "amx": false,
+      "arm_neon": false
+    },
+    "igpu_model": "Intel UHD Graphics (32 EUs)",
+    "pcie_controller_gen": 5,
+    "undervolting_supported": { "value": true, "status": "CONFIRMED", "source": "COMMUNITY_DATABASE", "confidence": 0.9 }
+  },
+  "gpu": {
+    "is_discrete": true,
+    "manufacturer": "NVIDIA",
+    "exact_model": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "chip_code": "AD107",
+    "architecture": "Ada Lovelace",
+    "cuda_cores_or_stream_processors": 3072,
+    "tensor_cores": 96,
+    "rt_cores": 24,
+    "vram_gb": 8.0,
+    "vram_type": "GDDR6",
+    "memory_bus_width_bit": { "value": 128, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "memory_bandwidth_gbps": { "value": 256.0, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "silicon_max_possible_tgp_w": 140.0,
+    "oem_base_tgp_w": { "value": 115.0, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "oem_dynamic_boost_w": { "value": 25.0, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "oem_total_max_tgp_w": { "value": 140.0, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "graphics_clock_base_mhz": { "value": 1920, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "graphics_clock_boost_mhz": { "value": 2370, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "has_mux_switch": { "value": true, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "advanced_optimus": { "value": true, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "gsync_display_support": { "value": true, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "video_encoders": {
+      "nvenc_version": "8th Gen (Ada)",
+      "av1_encode_hardware": true,
+      "dual_encoders": false
+    },
+    "cuda_compute_capability": "8.9"
+  },
+  "memory": {
+    "total_capacity_gb": 32,
+    "ram_type": "DDR5",
+    "speed_mts": 5600,
+    "channel_configuration": "DUAL_CHANNEL",
+    "bus_width_bits": { "value": 128, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "soldered_capacity_gb": 0,
+    "sodimm_slots_total": 2,
+    "sodimm_slots_occupied": 2,
+    "max_supported_capacity_gb": 96,
+    "cas_latency_cl": { "value": 40, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "measured_read_bandwidth_gbps": { "value": 78.5, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 }
+  },
+  "storage": {
+    "total_capacity_gb": 1024,
+    "m2_slots_total": 2,
+    "m2_slots_occupied": 1,
+    "primary_drive": {
+      "exact_ssd_model": { "value": "Samsung PM9A1a TLC NVMe", "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+      "capacity_gb": 1024,
+      "form_factor": "M.2_2280",
+      "interface_type": "NVMe_PCIe",
+      "pcie_generation": 4,
+      "pcie_lanes": 4,
+      "nand_type": "TLC",
+      "has_dram_cache": { "value": true, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+      "sequential_read_mbps": { "value": 7000.0, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+      "sequential_write_mbps": { "value": 5100.0, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+      "sustained_write_throttle_observed": { "value": false, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 }
+    }
+  },
+  "display": {
+    "diagonal_inches": 16.0,
+    "aspect_ratio": "16:10",
+    "resolution_horizontal": 2560,
+    "resolution_vertical": 1600,
+    "refresh_rate_hz": 240,
+    "panel_technology": "IPS",
+    "advertised_brightness_nits": 500.0,
+    "measured_brightness_nits": { "value": 512.0, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "contrast_ratio": { "value": 1250.0, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "response_time_gtg_ms": { "value": 3.2, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "color_gamut_srgb_pct": { "value": 100.0, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "color_gamut_dci_p3_pct": { "value": 99.2, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "delta_e_accuracy": { "value": 1.1, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "vrr_technology": "G_SYNC",
+    "pwm_flicker_free": { "value": true, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "pwm_frequency_hz": { "value": 0.0, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "surface_finish": "MATTE_ANTI_GLARE"
+  },
+  "cooling": {
+    "fan_count": 2,
+    "heatpipe_count": { "value": 5, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "heatpipe_topology": "DEDICATED_CPU_AND_GPU",
+    "has_vapor_chamber": true,
+    "thermal_interface_material": "LIQUID_METAL",
+    "exhaust_vents_count": 4,
+    "vrm_actively_cooled": { "value": true, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "vram_actively_cooled": { "value": true, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 },
+    "rated_thermal_dissipation_watts": { "value": 195.0, "status": "CONFIRMED", "source": "OEM_SPEC", "confidence": 1.0 },
+    "measured_noise_dba_max_load": { "value": 48.5, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 }
+  },
+  "power": {
+    "battery_capacity_wh": 80.0,
+    "adapter_rating_w": 240.0,
+    "adapter_form_factor": "SLIM_GAN",
+    "usb_c_pd_charging_supported": true,
+    "usb_c_pd_max_input_w": 140.0,
+    "battery_discharge_under_ac_crossload": { "value": false, "status": "CONFIRMED", "source": "BENCHMARK_MEASURED", "confidence": 1.0 }
+  }
+}

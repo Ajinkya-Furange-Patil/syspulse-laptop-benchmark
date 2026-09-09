@@ -1,0 +1,365 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LaptopSpecificationAuditSchema",
+  "description": "Rigorous, normalized specification schema for Laptop Buyer Audit Engine. Captures hardware configuration, power envelopes, cooling capacity, and benchmark provenance.",
+  "type": "object",
+  "required": [
+    "metadata",
+    "chassis",
+    "cpu",
+    "gpu",
+    "memory",
+    "storage",
+    "display",
+    "cooling",
+    "power"
+  ],
+  "definitions": {
+    "audit_field_string": {
+      "type": "object",
+      "required": ["value", "status", "source", "confidence"],
+      "properties": {
+        "value": { "type": ["string", "null"] },
+        "status": { "type": "string", "enum": ["CONFIRMED", "ESTIMATED", "UNKNOWN"] },
+        "source": { "type": "string", "enum": ["OEM_SPEC", "BENCHMARK_MEASURED", "COMMUNITY_DATABASE", "USER_MANUAL_INPUT", "UNKNOWN"] },
+        "confidence": { "type": "number", "minimum": 0.0, "maximum": 1.0 }
+      }
+    },
+    "audit_field_number": {
+      "type": "object",
+      "required": ["value", "status", "source", "confidence"],
+      "properties": {
+        "value": { "type": ["number", "null"] },
+        "status": { "type": "string", "enum": ["CONFIRMED", "ESTIMATED", "UNKNOWN"] },
+        "source": { "type": "string", "enum": ["OEM_SPEC", "BENCHMARK_MEASURED", "COMMUNITY_DATABASE", "USER_MANUAL_INPUT", "UNKNOWN"] },
+        "confidence": { "type": "number", "minimum": 0.0, "maximum": 1.0 }
+      }
+    },
+    "audit_field_boolean": {
+      "type": "object",
+      "required": ["value", "status", "source", "confidence"],
+      "properties": {
+        "value": { "type": ["boolean", "null"] },
+        "status": { "type": "string", "enum": ["CONFIRMED", "ESTIMATED", "UNKNOWN"] },
+        "source": { "type": "string", "enum": ["OEM_SPEC", "BENCHMARK_MEASURED", "COMMUNITY_DATABASE", "USER_MANUAL_INPUT", "UNKNOWN"] },
+        "confidence": { "type": "number", "minimum": 0.0, "maximum": 1.0 }
+      }
+    }
+  },
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["brand", "model_name", "exact_sku", "release_year", "price"],
+      "properties": {
+        "brand": { "type": "string" },
+        "series": { "type": "string" },
+        "model_name": { "type": "string" },
+        "exact_sku": { "type": "string" },
+        "release_year": { "type": "integer", "minimum": 2018, "maximum": 2030 },
+        "msrp_inr": { "type": "number", "minimum": 0 },
+        "street_price_inr": { "type": "number", "minimum": 0 },
+        "msrp_usd": { "type": "number", "minimum": 0 },
+        "target_audience": { "type": "string" },
+        "marketing_headline": { "type": "string" }
+      }
+    },
+    "chassis": {
+      "type": "object",
+      "required": ["weight_kg", "dimensions_mm", "chassis_materials"],
+      "properties": {
+        "weight_kg": { "$ref": "#/definitions/audit_field_number" },
+        "dimensions_mm": {
+          "type": "object",
+          "properties": {
+            "width": { "type": "number" },
+            "depth": { "type": "number" },
+            "thickness_min": { "type": "number" },
+            "thickness_max": { "type": "number" }
+          }
+        },
+        "chassis_materials": { "type": "string" },
+        "service_access": {
+          "type": "object",
+          "properties": {
+            "easy_access_panel": { "type": "boolean" },
+            "screw_type": { "type": "string", "enum": ["PHILIPS", "TORX", "PENTALOBE", "GLUED", "UNKNOWN"] },
+            "chassis_pry_difficulty": { "type": "string", "enum": ["EASY", "MODERATE", "DIFFICULT", "HAZARDOUS"] }
+          }
+        }
+      }
+    },
+    "cpu": {
+      "type": "object",
+      "required": [
+        "manufacturer",
+        "exact_model",
+        "architecture",
+        "total_physical_cores",
+        "total_threads",
+        "base_clock_ghz",
+        "boost_clock_ghz",
+        "oem_pl1_w",
+        "oem_pl2_w"
+      ],
+      "properties": {
+        "manufacturer": { "type": "string", "enum": ["Intel", "AMD", "Apple", "Qualcomm"] },
+        "exact_model": { "type": "string" },
+        "architecture": { "type": "string" },
+        "generation": { "type": "string" },
+        "process_node_nm": { "type": "number" },
+        "total_physical_cores": { "type": "integer", "minimum": 2, "maximum": 64 },
+        "performance_cores": { "type": "integer", "minimum": 0, "maximum": 32 },
+        "efficiency_cores": { "type": "integer", "minimum": 0, "maximum": 32 },
+        "total_threads": { "type": "integer", "minimum": 2, "maximum": 128 },
+        "base_clock_ghz": { "type": "number", "minimum": 0.5, "maximum": 5.0 },
+        "boost_clock_ghz": { "type": "number", "minimum": 1.0, "maximum": 6.5 },
+        "all_core_boost_ghz": { "$ref": "#/definitions/audit_field_number" },
+        "cache": {
+          "type": "object",
+          "properties": {
+            "l2_total_mb": { "type": "number" },
+            "l3_total_mb": { "type": "number" }
+          }
+        },
+        "intel_or_amd_spec_base_power_w": { "type": "number" },
+        "intel_or_amd_spec_max_turbo_w": { "type": "number" },
+        "oem_pl1_w": { "$ref": "#/definitions/audit_field_number" },
+        "oem_pl2_w": { "$ref": "#/definitions/audit_field_number" },
+        "oem_tau_seconds": { "$ref": "#/definitions/audit_field_number" },
+        "npu_present": { "type": "boolean" },
+        "npu_tops": { "$ref": "#/definitions/audit_field_number" },
+        "instruction_extensions": {
+          "type": "object",
+          "properties": {
+            "avx2": { "type": "boolean" },
+            "avx512": { "type": "boolean" },
+            "avx10": { "type": "boolean" },
+            "amx": { "type": "boolean" },
+            "arm_neon": { "type": "boolean" }
+          }
+        },
+        "igpu_model": { "type": "string" },
+        "pcie_controller_gen": { "type": "integer", "enum": [3, 4, 5] },
+        "undervolting_supported": { "$ref": "#/definitions/audit_field_boolean" }
+      }
+    },
+    "gpu": {
+      "type": "object",
+      "required": [
+        "is_discrete",
+        "exact_model",
+        "vram_gb",
+        "oem_base_tgp_w",
+        "oem_dynamic_boost_w",
+        "has_mux_switch"
+      ],
+      "properties": {
+        "is_discrete": { "type": "boolean" },
+        "manufacturer": { "type": "string", "enum": ["NVIDIA", "AMD", "Intel", "Apple", "None"] },
+        "exact_model": { "type": "string" },
+        "chip_code": { "type": "string" },
+        "architecture": { "type": "string" },
+        "cuda_cores_or_stream_processors": { "type": "integer" },
+        "tensor_cores": { "type": "integer" },
+        "rt_cores": { "type": "integer" },
+        "vram_gb": { "type": "number", "minimum": 0, "maximum": 96 },
+        "vram_type": { "type": "string", "enum": ["GDDR6", "GDDR6X", "LPDDR5", "LPDDR5X", "HBM", "Shared_System_RAM", "UNKNOWN"] },
+        "memory_bus_width_bit": { "$ref": "#/definitions/audit_field_number" },
+        "memory_bandwidth_gbps": { "$ref": "#/definitions/audit_field_number" },
+        "silicon_max_possible_tgp_w": { "type": "number" },
+        "oem_base_tgp_w": { "$ref": "#/definitions/audit_field_number" },
+        "oem_dynamic_boost_w": { "$ref": "#/definitions/audit_field_number" },
+        "oem_total_max_tgp_w": { "$ref": "#/definitions/audit_field_number" },
+        "graphics_clock_base_mhz": { "$ref": "#/definitions/audit_field_number" },
+        "graphics_clock_boost_mhz": { "$ref": "#/definitions/audit_field_number" },
+        "has_mux_switch": { "$ref": "#/definitions/audit_field_boolean" },
+        "advanced_optimus": { "$ref": "#/definitions/audit_field_boolean" },
+        "gsync_display_support": { "$ref": "#/definitions/audit_field_boolean" },
+        "video_encoders": {
+          "type": "object",
+          "properties": {
+            "nvenc_version": { "type": "string" },
+            "av1_encode_hardware": { "type": "boolean" },
+            "dual_encoders": { "type": "boolean" }
+          }
+        },
+        "cuda_compute_capability": { "type": "string" }
+      }
+    },
+    "memory": {
+      "type": "object",
+      "required": [
+        "total_capacity_gb",
+        "ram_type",
+        "speed_mts",
+        "channel_configuration",
+        "soldered_capacity_gb",
+        "sodimm_slots_total",
+        "sodimm_slots_occupied",
+        "max_supported_capacity_gb"
+      ],
+      "properties": {
+        "total_capacity_gb": { "type": "integer", "minimum": 4, "maximum": 256 },
+        "ram_type": { "type": "string", "enum": ["DDR4", "DDR5", "LPDDR4X", "LPDDR5", "LPDDR5X", "CAMM2"] },
+        "speed_mts": { "type": "integer", "minimum": 1600, "maximum": 9600 },
+        "channel_configuration": { "type": "string", "enum": ["SINGLE_CHANNEL", "DUAL_CHANNEL", "QUAD_CHANNEL", "UNKNOWN"] },
+        "bus_width_bits": { "$ref": "#/definitions/audit_field_number" },
+        "soldered_capacity_gb": { "type": "integer", "minimum": 0, "maximum": 128 },
+        "sodimm_slots_total": { "type": "integer", "minimum": 0, "maximum": 4 },
+        "sodimm_slots_occupied": { "type": "integer", "minimum": 0, "maximum": 4 },
+        "max_supported_capacity_gb": { "type": "integer", "minimum": 4, "maximum": 256 },
+        "measured_read_bandwidth_gbps": { "$ref": "#/definitions/audit_field_number" },
+        "measured_latency_ns": { "$ref": "#/definitions/audit_field_number" },
+        "cas_latency_cl": { "$ref": "#/definitions/audit_field_number" }
+      }
+    },
+    "storage": {
+      "type": "object",
+      "required": [
+        "total_capacity_gb",
+        "m2_slots_total",
+        "m2_slots_occupied",
+        "primary_drive"
+      ],
+      "properties": {
+        "total_capacity_gb": { "type": "integer", "minimum": 128, "maximum": 16384 },
+        "m2_slots_total": { "type": "integer", "minimum": 1, "maximum": 4 },
+        "m2_slots_occupied": { "type": "integer", "minimum": 1, "maximum": 4 },
+        "primary_drive": {
+          "type": "object",
+          "required": ["capacity_gb", "interface_type", "pcie_generation", "has_dram_cache"],
+          "properties": {
+            "exact_ssd_model": { "$ref": "#/definitions/audit_field_string" },
+            "capacity_gb": { "type": "integer" },
+            "form_factor": { "type": "string", "enum": ["M.2_2280", "M.2_2242", "M.2_2230", "Soldered_UFS", "Soldered_NVMe"] },
+            "interface_type": { "type": "string", "enum": ["NVMe_PCIe", "SATA", "UFS"] },
+            "pcie_generation": { "type": "integer", "enum": [3, 4, 5] },
+            "pcie_lanes": { "type": "integer", "enum": [2, 4] },
+            "nand_type": { "type": "string", "enum": ["SLC", "MLC", "TLC", "QLC", "UNKNOWN"] },
+            "has_dram_cache": { "$ref": "#/definitions/audit_field_boolean" },
+            "sequential_read_mbps": { "$ref": "#/definitions/audit_field_number" },
+            "sequential_write_mbps": { "$ref": "#/definitions/audit_field_number" },
+            "random_read_iops": { "$ref": "#/definitions/audit_field_number" },
+            "sustained_write_throttle_observed": { "$ref": "#/definitions/audit_field_boolean" }
+          }
+        },
+        "secondary_slot": {
+          "type": "object",
+          "properties": {
+            "supported_form_factors": { "type": "array", "items": { "type": "string" } },
+            "pcie_generation": { "type": "integer" },
+            "pcie_lanes": { "type": "integer" }
+          }
+        }
+      }
+    },
+    "display": {
+      "type": "object",
+      "required": [
+        "diagonal_inches",
+        "aspect_ratio",
+        "resolution_horizontal",
+        "resolution_vertical",
+        "refresh_rate_hz",
+        "panel_technology",
+        "advertised_brightness_nits",
+        "color_gamut_srgb_pct"
+      ],
+      "properties": {
+        "diagonal_inches": { "type": "number", "minimum": 10.0, "maximum": 21.0 },
+        "aspect_ratio": { "type": "string", "enum": ["16:9", "16:10", "3:2", "4:3"] },
+        "resolution_horizontal": { "type": "integer", "minimum": 1280, "maximum": 7680 },
+        "resolution_vertical": { "type": "integer", "minimum": 720, "maximum": 4320 },
+        "refresh_rate_hz": { "type": "integer", "minimum": 60, "maximum": 540 },
+        "panel_technology": { "type": "string", "enum": ["IPS", "OLED", "Mini_LED", "TN", "VA"] },
+        "advertised_brightness_nits": { "type": "number", "minimum": 150, "maximum": 2500 },
+        "measured_brightness_nits": { "$ref": "#/definitions/audit_field_number" },
+        "contrast_ratio": { "$ref": "#/definitions/audit_field_number" },
+        "response_time_gtg_ms": { "$ref": "#/definitions/audit_field_number" },
+        "color_gamut_srgb_pct": { "$ref": "#/definitions/audit_field_number" },
+        "color_gamut_dci_p3_pct": { "$ref": "#/definitions/audit_field_number" },
+        "color_gamut_adobe_rgb_pct": { "$ref": "#/definitions/audit_field_number" },
+        "delta_e_accuracy": { "$ref": "#/definitions/audit_field_number" },
+        "vrr_technology": { "type": "string", "enum": ["G_SYNC", "FreeSync", "AdaptiveSync", "None", "UNKNOWN"] },
+        "pwm_flicker_free": { "$ref": "#/definitions/audit_field_boolean" },
+        "pwm_frequency_hz": { "$ref": "#/definitions/audit_field_number" },
+        "surface_finish": { "type": "string", "enum": ["MATTE_ANTI_GLARE", "GLOSSY"] }
+      }
+    },
+    "cooling": {
+      "type": "object",
+      "required": [
+        "fan_count",
+        "heatpipe_topology",
+        "has_vapor_chamber",
+        "thermal_interface_material"
+      ],
+      "properties": {
+        "fan_count": { "type": "integer", "minimum": 0, "maximum": 4 },
+        "heatpipe_count": { "$ref": "#/definitions/audit_field_number" },
+        "heatpipe_topology": { "type": "string", "enum": ["DEDICATED_CPU_AND_GPU", "SHARED_HEATPIPES", "HYBRID", "UNKNOWN"] },
+        "has_vapor_chamber": { "type": "boolean" },
+        "thermal_interface_material": { "type": "string", "enum": ["STANDARD_PASTE", "PHASE_CHANGE_PAD", "LIQUID_METAL", "UNKNOWN"] },
+        "exhaust_vents_count": { "type": "integer", "minimum": 1, "maximum": 6 },
+        "vrm_actively_cooled": { "$ref": "#/definitions/audit_field_boolean" },
+        "vram_actively_cooled": { "$ref": "#/definitions/audit_field_boolean" },
+        "rated_thermal_dissipation_watts": { "$ref": "#/definitions/audit_field_number" },
+        "intake_filter_mesh": { "type": "boolean" },
+        "measured_noise_dba_max_load": { "$ref": "#/definitions/audit_field_number" }
+      }
+    },
+    "power": {
+      "type": "object",
+      "required": [
+        "battery_capacity_wh",
+        "adapter_rating_w",
+        "usb_c_pd_charging_supported"
+      ],
+      "properties": {
+        "battery_capacity_wh": { "type": "number", "minimum": 20, "maximum": 99.9 },
+        "battery_chemistry": { "type": "string" },
+        "battery_cells": { "type": "integer" },
+        "adapter_rating_w": { "type": "number", "minimum": 30, "maximum": 400 },
+        "adapter_form_factor": { "type": "string", "enum": ["STANDARD_BARREL", "SLIM_GAN", "PROPRIETARY", "TYPE_C"] },
+        "usb_c_pd_charging_supported": { "type": "boolean" },
+        "usb_c_pd_max_input_w": { "type": "number" },
+        "battery_discharge_under_ac_crossload": { "$ref": "#/definitions/audit_field_boolean" }
+      }
+    },
+    "connectivity_and_ports": {
+      "type": "object",
+      "properties": {
+        "thunderbolt_ports": { "type": "integer" },
+        "usb4_ports": { "type": "integer" },
+        "usb_c_total": { "type": "integer" },
+        "usb_a_total": { "type": "integer" },
+        "hdmi_version": { "type": "string" },
+        "ethernet_rj45_speed_mbps": { "type": "integer" },
+        "sd_card_slot": { "type": "string", "enum": ["FULL_SIZE_SD", "MICRO_SD", "NONE"] },
+        "wifi_standard": { "type": "string", "enum": ["Wi-Fi 5", "Wi-Fi 6", "Wi-Fi 6E", "Wi-Fi 7"] },
+        "wifi_module_socketed": { "$ref": "#/definitions/audit_field_boolean" }
+      }
+    },
+    "benchmarks": {
+      "type": "object",
+      "properties": {
+        "test_ambient_temp_c": { "type": "number" },
+        "cinebench_r23_single": { "type": "number" },
+        "cinebench_r23_multi_initial": { "type": "number" },
+        "cinebench_r23_multi_sustained_10min": { "type": "number" },
+        "timespy_graphics_score": { "type": "number" },
+        "timespy_cpu_score": { "type": "number" },
+        "geekbench6_single": { "type": "number" },
+        "geekbench6_multi": { "type": "number" },
+        "blender_classroom_render_time_sec": { "type": "number" },
+        "llm_token_generation_rate_llama3_8b_tok_sec": { "type": "number" },
+        "cpu_peak_package_temp_c": { "type": "number" },
+        "cpu_sustained_temp_c": { "type": "number" },
+        "gpu_peak_temp_c": { "type": "number" },
+        "gpu_sustained_temp_c": { "type": "number" },
+        "thermal_throttling_observed": { "type": "boolean" },
+        "sustained_performance_loss_percent": { "type": "number" }
+      }
+    }
+  }
+}

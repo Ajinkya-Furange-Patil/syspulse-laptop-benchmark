@@ -27,7 +27,13 @@ SysPulse_Portable/
 
 # System & OS temporary files
 Thumbs.db
-Desktop.ini
-*.log
-*.tmp
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Python bytecode and cache
+__pycache__/
+*.pyc
+*.pyo
 
